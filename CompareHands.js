@@ -103,7 +103,7 @@ module.exports = class CompareHands {
     return 0;
   }
 
-  static isOnePair(hand) { // TODO!
+  static isPair(hand) { // TODO!
     this.sortByRank(hand);
     let ranks = '';
     let score = 0;
