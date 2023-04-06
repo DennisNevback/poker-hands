@@ -14,7 +14,7 @@ module.exports = class CompareHands {
       'isStraight',
       'isThreeOfAKind',
       'isTwoPair',
-      'isOnePair',
+      'isPair',
       'isHighestCard'
     ];
 
@@ -40,11 +40,37 @@ module.exports = class CompareHands {
   }
 
   static isFourOfAKind(hand) { // TODO!
-    return 0;
+    this.sortByRank(hand);
+    let ranks = '';
+    for (let card of hand.cards) {
+      ranks += card.rank;
+    }
+    const threeOfAKind = ranks[2].concat(ranks[2]).concat(ranks[2]).concat(ranks[2]);
+    if (ranks.includes(threeOfAKind)) {
+      return this.rankToPoint(ranks[2]);
+    }
+    else {
+      return 0;
+    }
   }
 
   static isFullHouse(hand) { // TODO!
-    return 0;
+    this.sortByRank(hand);
+    let ranks = '';
+    for (let card of hand.cards) {
+      ranks += card.rank;
+    }
+    let ranks2 = ranks;
+    const threeOfAKind = ranks[2].concat(ranks[2]).concat(ranks[2]);
+    if (ranks.includes(threeOfAKind)) {
+      ranks.replace(threeOfAKind, '');
+      if (ranks[0] == ranks[1]) {
+        return this.rankToPoint(threeOfAKind[0]);
+      }
+    }
+    else {
+      return 0;
+    }
   }
 
   static isFlush(hand) {
@@ -100,6 +126,33 @@ module.exports = class CompareHands {
   }
 
   static isTwoPair(hand) { // TODO!
+    this.sortByRank(hand);
+    let ranks = '';
+    let score = 0;
+    let counter = 0;
+    for (let card of hand.cards) {
+      ranks += card.rank;
+    }
+    let ranks2 = ranks;
+    for (let i = 0; i < ranks.length; i++) {
+      let pairCompare = ranks[i].concat(ranks[i]);
+      if (ranks.includes(pairCompare)) {
+        ranks = ranks.replace(pairCompare, '');
+        for (let i = 0; i < ranks.length; i++) {
+          pairCompare = ranks[i].concat(ranks[i]);
+          if (ranks.includes(pairCompare)) {
+            ranks = ranks.replace(pairCompare, '');
+            ranks2 = ranks2.replace(ranks, '');
+            ranks2 = ranks + ranks2;
+            for (let card of ranks2) {
+              score += this.rankToPoint(card) * 10 ** counter;
+              counter += 2;
+            }
+            return score;
+          }
+        }
+      }
+    }
     return 0;
   }
 
