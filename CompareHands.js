@@ -175,7 +175,6 @@ module.exports = class CompareHands {
         for (let card of pairCompare) {
           score += this.rankToPoint(card) * 10 ** counter;
           counter += 2;
-          console.log('Score' + score)
         }
         return score;
       }
