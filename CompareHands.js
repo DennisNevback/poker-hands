@@ -45,8 +45,8 @@ module.exports = class CompareHands {
     for (let card of hand.cards) {
       ranks += card.rank;
     }
-    const threeOfAKind = ranks[2].concat(ranks[2]).concat(ranks[2]).concat(ranks[2]);
-    if (ranks.includes(threeOfAKind)) {
+    const fourOfAKind = ranks[2].concat(ranks[2]).concat(ranks[2]).concat(ranks[2]);
+    if (ranks.includes(fourOfAKind)) {
       return this.rankToPoint(ranks[2]);
     }
     else {
@@ -60,7 +60,6 @@ module.exports = class CompareHands {
     for (let card of hand.cards) {
       ranks += card.rank;
     }
-    let ranks2 = ranks;
     const threeOfAKind = ranks[2].concat(ranks[2]).concat(ranks[2]);
     if (ranks.includes(threeOfAKind)) {
       ranks.replace(threeOfAKind, '');

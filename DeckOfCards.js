@@ -1,6 +1,13 @@
 const Card = require('./Card');
 const Hand = require('./Hand');
 
+let suitConverter = [
+  'H' = '♥',
+  'R' = '♦',
+  'S' = '♠',
+  'K' = '♣'
+]
+
 module.exports = class DeckOfCards {
 
   constructor() {
@@ -27,6 +34,10 @@ module.exports = class DeckOfCards {
 
   dealHand() {
     return new Hand(...this.cards.splice(0, 5));
+  }
+
+  discardCards(string) { // input ser ut ex: H5, S8, SK
+    string.splice(', ')
   }
 
 }
