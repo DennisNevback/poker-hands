@@ -1,12 +1,6 @@
 const Card = require('./Card');
 const Hand = require('./Hand');
 
-let suitConverter = [
-  'H' = '♥',
-  'R' = '♦',
-  'S' = '♠',
-  'K' = '♣'
-]
 
 module.exports = class DeckOfCards {
 
@@ -40,4 +34,21 @@ module.exports = class DeckOfCards {
     string.splice(', ')
   }
 
+  static deckUnique(deck) {
+    let counter = 0;
+    let deck2 = deck;
+    for (let i = 0; i < deck.cards.length; i++) {
+      for (let j = 0; j < deck2.cards.length; j++) {
+        if (deck.cards[i] == deck2.cards[j])
+          counter++;
+      }
+    }
+    if (counter == 52) {
+      console.log(counter);
+      return counter;
+    }
+    else {
+      return 0;
+    }
+  }
 }
